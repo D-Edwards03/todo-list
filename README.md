@@ -8,5 +8,9 @@ Make sure you have **Node.js** and **npm** installed.
 
 Install project dependencies:
 
-```bash
+```bash```
 npm install
+
+## How to Run
+
+npm run dev
