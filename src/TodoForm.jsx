@@ -9,6 +9,7 @@ function TodoForm({ onAddTodo }) {
 
         if (workingTodoTitle.trim() !== "") {
             onAddTodo(workingTodoTitle);
+            setWorkingTodoTitle("");
             inputRef.current.focus();
         }
     };
@@ -26,7 +27,9 @@ function TodoForm({ onAddTodo }) {
                 value={workingTodoTitle}
                 onChange={(event) => setWorkingTodoTitle(event.target.value)}
             />
-            <button type="submit">Add Todo</button>
+            <button type="submit" disabled={!workingTodoTitle.trim()}>
+                Add Todo
+            </button>
         </form>
     );
 }
