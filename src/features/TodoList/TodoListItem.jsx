@@ -9,22 +9,34 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     startEditing,
     cancelEdit,
     updateTitle,
-    finishEdit
-  } = useEditableTitle(todo.title)
+    finishEdit,
+  } = useEditableTitle(todo.title);
 
   const handleUpdate = (event) => {
     if (!isEditing) return;
 
     event.preventDefault();
-    const finalTitle = finishEdit();
-    onUpdateTodo({ ...todo, title: finalTitle });
+
+    if (!isValidTodoTitle(workingTitle)) {
+      cancelEdit();
+      return;
+    }
+
+    onUpdateTodo({ ...todo, title: workingTitle });
+
+    finishEdit();
   };
 
   return (
     <li>
       {isEditing ? (
         <form onSubmit={handleUpdate}>
-          <TextInputWithLabel value={workingTitle} onChange={(event) => updateTitle(event.target.value)} />
+          <TextInputWithLabel
+            elementId={`edit-todo-${todo.id}`}
+            labelText="Edit Todo"
+            value={workingTitle}
+            onChange={(event) => updateTitle(event.target.value)}
+          />
           <button type="button" onClick={cancelEdit}>
             Cancel
           </button>
@@ -39,12 +51,14 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
         </form>
       ) : (
         <>
-          <input
-            type="checkbox"
-            checked={todo.isCompleted}
-            onChange={() => onCompleteTodo(todo.id)}
-          />
-          <span onClick={startEditing}>{todo.title}</span>
+          <form>
+            <input
+              type="checkbox"
+              checked={todo.isCompleted}
+              onChange={() => onCompleteTodo(todo.id)}
+            />
+            <span onClick={startEditing}>{todo.title}</span>
+          </form>
         </>
       )}
     </li>
