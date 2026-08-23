@@ -1,8 +1,7 @@
 import { useState } from "react";
 import TextInputWithLabel from "../../shared/TextInputWithLabel";
-import { isValidTodoTitle } from "../../utils/todoValidation";
 
-function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
+function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
   const [workingTitle, setWorkingTitle] = useState(todo.title);
 
@@ -11,16 +10,18 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     setIsEditing(false);
   };
 
-  const handleEdit = (event) => {
-    setWorkingTitle(event.target.value);
-  };
-
   const handleUpdate = (event) => {
+    event?.preventDefault();
+
     if (!isEditing) return;
 
-    event.preventDefault();
     onUpdateTodo({ ...todo, title: workingTitle });
+    setWorkingTitle(workingTitle);
     setIsEditing(false);
+  };
+
+  const onToggle = (id) => {
+    onCompleteTodo(id);
   };
 
   return (
@@ -28,31 +29,32 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
       {isEditing ? (
         <form onSubmit={handleUpdate}>
           <TextInputWithLabel
-            elementId={`edit-todo-${todo.id}`}
-            labelText="Edit Todo"
+            label="Edit todo"
             value={workingTitle}
-            onChange={handleEdit}
+            onChange={(event) => setWorkingTitle(event.target.value)}
           />
           <button type="button" onClick={handleCancel}>
             Cancel
           </button>
-          <button
-            type="button"
-            onClick={handleUpdate}
-            disabled={!isValidTodoTitle(workingTitle)}
-          >
+          <button type="button" onClick={handleUpdate}>
             Update
           </button>
         </form>
       ) : (
-        <form onSubmit={handleUpdate}>
+        <>
           <input
             type="checkbox"
-            checked={todo.isCompleted}
-            onChange={() => onCompleteTodo(todo.id)}
+            checked={todo.completed}
+            onChange={() => onToggle(todo.id)}
           />
           <span onClick={() => setIsEditing(true)}>{todo.title}</span>
-        </form>
+        </>
+      )}
+
+      {!isEditing && (
+        <button type="button" onClick={() => onDelete(todo.id)}>
+          Delete
+        </button>
       )}
     </li>
   );
