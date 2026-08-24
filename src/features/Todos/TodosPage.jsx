@@ -23,10 +23,6 @@ function TodosPage({ token }) {
           credentials: "include",
         });
 
-        if (response.status === 401) {
-          throw new Error("unauthorized");
-        }
-
         if (!response.ok) {
           throw new Error("Failed to fetch todos.");
         }
@@ -49,7 +45,7 @@ function TodosPage({ token }) {
     const tempTodo = {
       id: Date.now(),
       title: todoTitle,
-      completed: false,
+      isCompleted: false,
       isTemp: true,
     };
 
@@ -65,7 +61,7 @@ function TodosPage({ token }) {
         credentials: "include",
         body: JSON.stringify({
           title: todoTitle,
-          completed: false,
+          isCompleted: false,
         }),
       });
 
@@ -95,7 +91,7 @@ function TodosPage({ token }) {
 
     setTodoList((prev) =>
       prev.map((todo) =>
-        todo.id === id ? { ...todo, completed: true } : todo
+        todo.id === id ? { ...todo, isCompleted: true } : todo
       )
     );
 
@@ -108,7 +104,7 @@ function TodosPage({ token }) {
         },
         credentials: "include",
         body: JSON.stringify({
-          completed: true,
+          isCompleted: true,
         }),
       });
 
@@ -146,7 +142,7 @@ function TodosPage({ token }) {
         credentials: "include",
         body: JSON.stringify({
           title: editedTodo.title,
-          completed: editedTodo.completed,
+          isCompleted: editedTodo.isCompleted,
         }),
       });
 
