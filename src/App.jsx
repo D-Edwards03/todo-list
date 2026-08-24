@@ -35,7 +35,7 @@ function App() {
       return todo;
     });
 
-    setTodoList(updatedtodos)
+    setTodoList(updatedtodos);
   }
 
   return (
