@@ -32,7 +32,7 @@ function TodosPage({ token }) {
         }
 
         const data = await response.json();
-        setTodoList(data);
+        setTodoList(data.tasks);
       } catch (err) {
         setError(err.message || "Something went wrong.");
       } finally {
@@ -44,10 +44,12 @@ function TodosPage({ token }) {
   }, [token]);
 
   async function addTodo(todoTitle) {
+    setError("");
+
     const tempTodo = {
       id: Date.now(),
       title: todoTitle,
-      isCompleted: false,
+      completed: false,
       isTemp: true,
     };
 
@@ -63,7 +65,7 @@ function TodosPage({ token }) {
         credentials: "include",
         body: JSON.stringify({
           title: todoTitle,
-          isCompleted: false,
+          completed: false,
         }),
       });
 
@@ -75,7 +77,7 @@ function TodosPage({ token }) {
 
       setTodoList((prev) =>
         prev.map((todo) =>
-          todo.id === tempTodo.id ? realTodo : todo
+          todo.isTemp && todo.id === tempTodo.id ? realTodo : todo
         )
       );
     } catch (err) {
@@ -87,11 +89,13 @@ function TodosPage({ token }) {
   }
 
   async function completeTodo(id) {
+    setError("");
+
     const originalTodo = todoList.find((t) => t.id === id);
 
     setTodoList((prev) =>
       prev.map((todo) =>
-        todo.id === id ? { ...todo, isCompleted: true } : todo
+        todo.id === id ? { ...todo, completed: true } : todo
       )
     );
 
@@ -104,7 +108,7 @@ function TodosPage({ token }) {
         },
         credentials: "include",
         body: JSON.stringify({
-          isCompleted: true,
+          completed: true,
         }),
       });
 
@@ -122,6 +126,8 @@ function TodosPage({ token }) {
   }
 
   async function updateTodo(editedTodo) {
+    setError("");
+
     const originalTodo = todoList.find((t) => t.id === editedTodo.id);
 
     setTodoList((prev) =>
@@ -140,7 +146,7 @@ function TodosPage({ token }) {
         credentials: "include",
         body: JSON.stringify({
           title: editedTodo.title,
-          isCompleted: editedTodo.isCompleted,
+          completed: editedTodo.completed,
         }),
       });
 
