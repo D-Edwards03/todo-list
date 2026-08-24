@@ -17,11 +17,13 @@ function TodosPage({ token }) {
       try {
         const response = await fetch("/api/tasks?limit=100", {
           method: "GET",
-          headers: {
-            "X-CSRF-TOKEN": token,
-          },
+          headers: { "X-CSRF-TOKEN": token },
           credentials: "include",
         });
+
+        if (response.status === 401) {
+          throw new Error("Unauthorized. Please log on again.");
+        }
 
         if (!response.ok) {
           throw new Error("Failed to fetch todos.");
@@ -65,6 +67,10 @@ function TodosPage({ token }) {
         }),
       });
 
+      if (response.status === 401) {
+        throw new Error("Unauthorized. Please log on again.");
+      }
+
       if (!response.ok) {
         throw new Error("Failed to add todo.");
       }
@@ -103,10 +109,12 @@ function TodosPage({ token }) {
           "X-CSRF-TOKEN": token,
         },
         credentials: "include",
-        body: JSON.stringify({
-          isCompleted: true,
-        }),
+        body: JSON.stringify({ isCompleted: true }),
       });
+
+      if (response.status === 401) {
+        throw new Error("Unauthorized. Please log on again.");
+      }
 
       if (!response.ok) {
         throw new Error("Failed to complete todo.");
@@ -146,6 +154,10 @@ function TodosPage({ token }) {
         }),
       });
 
+      if (response.status === 401) {
+        throw new Error("Unauthorized. Please log on again.");
+      }
+
       if (!response.ok) {
         throw new Error("Failed to update todo.");
       }
@@ -161,8 +173,6 @@ function TodosPage({ token }) {
 
   return (
     <div>
-      <h1>Todo List</h1>
-
       {error && (
         <div style={{ color: "red", marginBottom: "1rem" }}>
           <p>{error}</p>

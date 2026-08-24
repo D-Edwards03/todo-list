@@ -18,17 +18,18 @@ function Logon({ onSetEmail, onSetToken }) {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+        body: JSON.stringify({ email, password }),
       });
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error("Invalid email or password.");
       }
 
       const data = await response.json();
+
+      if (!data.name || !data.csrfToken) {
+        throw new Error("Unexpected server response.");
+      }
 
       onSetEmail(data.name);
       onSetToken(data.csrfToken);
@@ -43,15 +44,14 @@ function Logon({ onSetEmail, onSetToken }) {
     <div>
       <h2>Log On</h2>
 
-      {authError && (
-        <p style={{ color: "red" }}>{authError}</p>
-      )}
+      {authError && <p style={{ color: "red" }}>{authError}</p>}
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
           id="email"
           type="text"
+          required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -60,6 +60,7 @@ function Logon({ onSetEmail, onSetToken }) {
         <input
           id="password"
           type="password"
+          required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
