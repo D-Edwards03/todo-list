@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import TodoForm from "./TodoForm.jsx";
 import TodoList from "./TodoList/TodoList.jsx";
 import SortBy from "../../shared/SortBy.jsx";
@@ -16,9 +16,16 @@ function TodosPage({ token }) {
   const [filterTerm, setFilterTerm] = useState("");
   const debouncedFilterTerm = useDebounce(filterTerm, 300);
 
+  const [dataVersion, setDataVersion] = useState(0);
+
   const handleFilterChange = (newTerm) => {
     setFilterTerm(newTerm);
   };
+
+  const invalidateCache = useCallback(() => {
+    console.log("Invalidating memo cache after todo mutation");
+    setDataVersion((prev) => prev + 1);
+  }, []);
 
   useEffect(() => {
     if (!token) return;
@@ -107,6 +114,9 @@ function TodosPage({ token }) {
           todo.isTemp && todo.id === tempTodo.id ? realTodo : todo
         )
       );
+
+      invalidateCache();
+
     } catch (err) {
       setTodoList((prev) =>
         prev.filter((todo) => todo.id !== tempTodo.id)
@@ -144,6 +154,9 @@ function TodosPage({ token }) {
       if (!response.ok) {
         throw new Error("Failed to complete todo.");
       }
+
+      invalidateCache();
+
     } catch (err) {
       setTodoList((prev) =>
         prev.map((todo) =>
@@ -186,6 +199,9 @@ function TodosPage({ token }) {
       if (!response.ok) {
         throw new Error("Failed to update todo.");
       }
+
+      invalidateCache();
+
     } catch (err) {
       setTodoList((prev) =>
         prev.map((todo) =>
@@ -225,6 +241,7 @@ function TodosPage({ token }) {
         todoList={todoList}
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
+        dataVersion={dataVersion}
       />
     </div>
   );
