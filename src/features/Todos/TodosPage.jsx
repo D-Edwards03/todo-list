@@ -25,7 +25,6 @@ function TodosPage({ token }) {
   };
 
   const invalidateCache = useCallback(() => {
-    console.log("Invalidating memo cache after todo mutation");
     setDataVersion((prev) => prev + 1);
   }, []);
 
@@ -40,6 +39,7 @@ function TodosPage({ token }) {
         const paramsObject = {
           sortBy,
           sortDirection,
+          limit: 100,
         };
 
         if (debouncedFilterTerm) {
@@ -47,7 +47,6 @@ function TodosPage({ token }) {
         }
 
         const params = new URLSearchParams(paramsObject);
-        params.set('limit', 100);
 
         const response = await fetch(`/api/tasks?${params}`, {
           method: "GET",
