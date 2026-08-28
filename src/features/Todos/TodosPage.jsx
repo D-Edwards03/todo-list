@@ -39,7 +39,7 @@ function TodosPage({ token }) {
         const paramsObject = {
           sortBy,
           sortDirection,
-          limit: 100
+          limit: 100,
         };
 
         if (debouncedFilterTerm) {
