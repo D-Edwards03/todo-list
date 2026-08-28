@@ -18,6 +18,8 @@ function TodosPage({ token }) {
 
   const [dataVersion, setDataVersion] = useState(0);
 
+  const [filterError, setFilterError] = useState("")
+
   const handleFilterChange = (newTerm) => {
     setFilterTerm(newTerm);
   };
@@ -63,8 +65,14 @@ function TodosPage({ token }) {
 
         const data = await response.json();
         setTodoList(data.tasks);
-      } catch (err) {
-        setError(err.message || "Something went wrong.");
+
+        setFilterError("");
+      } catch (error) {
+        if (debouncedFilterTerm || sortBy !== 'createdAt' || sortDirection !== 'desc') {
+          setFilterError(`Error filtering/sorting todos: ${error.message}`);
+        } else {
+          setError(`Error fetching todos: ${error.message}`);
+        }
       } finally {
         setIsTodoListLoading(false);
       }
@@ -218,6 +226,25 @@ function TodosPage({ token }) {
         <div style={{ color: "red", marginBottom: "1rem" }}>
           <p>{error}</p>
           <button onClick={() => setError("")}>Clear Error</button>
+        </div>
+      )}
+
+      {filterError && (
+        <div style={{ color: "orange", marginBottom: "1rem" }}>
+          <p>{filterError}</p>
+          <button onClick={() => setFilterError("")} style={{ marginRight: "0.5rem" }}>
+            Clear Filter Error
+          </button>
+          <button
+            onClick={() => {
+              setFilterTerm("");
+              setSortBy("createdAt");
+              setSortDirection("desc");
+              setFilterError("");
+            }}
+          >
+            Reset Filters
+          </button>
         </div>
       )}
 
