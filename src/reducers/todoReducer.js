@@ -52,8 +52,9 @@ export function todoReducer(state, action) {
       // Expects action.payload to be the fetched tasks array
       return {
         ...state,
-        todoList: action.payload,
+        todoList: action.payload.todos,
         isTodoListLoading: false,
+        error: '',
         filterError: '',
       };
 
@@ -62,8 +63,8 @@ export function todoReducer(state, action) {
       return {
         ...state,
         isTodoListLoading: false,
-        error: action.payload.isFilterError ? state.error : action.payload.message,
-        filterError: action.payload.isFilterError ? action.payload.message : state.filterError,
+        error: action.payload.isFilterError ? '' : action.payload.message,
+        filterError: action.payload.isFilterError ? action.payload.message : '',
       };
 
     // --- ADD TODO OPERATIONS ---
@@ -178,7 +179,7 @@ export function todoReducer(state, action) {
         ...state,
         filterTerm: '',
         sortBy: 'createdAt',
-        sortDirection: 'desc',
+        sortDirection: 'asc',
         filterError: '',
       };
 

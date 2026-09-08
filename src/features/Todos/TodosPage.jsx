@@ -64,7 +64,7 @@ function TodosPage() {
         
         dispatch({
           type: TODO_ACTIONS.FETCH_SUCCESS,
-          payload: data.tasks, 
+          payload: { todos: data.tasks }, 
         });
 
       } catch (error) {
@@ -243,18 +243,18 @@ function TodosPage() {
       <SortBy 
         sortBy={sortBy}
         sortDirection={sortDirection}
-        onSortByChange={(newSortBy) => 
+        onSortByChange={(newSortBy) => {
           dispatch({
             type: TODO_ACTIONS.SET_SORT,
             payload: { sortBy: newSortBy, sortDirection }
           })
-        }
-        onSortDirectionChange={(newDirection) => 
+        }}
+        onSortDirectionChange={(newDirection) => {
           dispatch({
             type: TODO_ACTIONS.SET_SORT,
             payload: { sortBy, sortDirection: newDirection }
           })
-        }
+        }}
       />
 
       <FilterInput
