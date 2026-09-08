@@ -109,6 +109,9 @@ export function todoReducer(state, action) {
       // Just needs to trigger the cache invalidation
       return {
         ...state,
+        todoList: state.todoList.map((todo) => 
+            todo.id === action.payload.id ? action.payload : todo
+        ),
         dataVersion: state.dataVersion + 1,
       };
 
@@ -137,6 +140,9 @@ export function todoReducer(state, action) {
       // Just needs to trigger the cache invalidation
       return {
         ...state,
+        todoList: state.todoList.map((todo) => 
+            todo.id === action.payload.id ? action.payload : todo
+        ),
         dataVersion: state.dataVersion + 1,
       };
 
@@ -180,6 +186,7 @@ export function todoReducer(state, action) {
         filterTerm: '',
         sortBy: 'createdAt',
         sortDirection: 'asc',
+        error: '',
         filterError: '',
       };
 

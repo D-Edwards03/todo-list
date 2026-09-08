@@ -30,6 +30,8 @@ function TodosPage() {
   useEffect(() => {
     if (!token) return;
 
+    const abortController = new AbortController();
+
     async function fetchTodos() {
       dispatch({ type: TODO_ACTIONS.FETCH_START });
 
@@ -50,6 +52,7 @@ function TodosPage() {
           method: "GET",
           headers: { "X-CSRF-TOKEN": token },
           credentials: "include",
+          signal: abortController.signal
         });
 
         if (response.status === 401) {
@@ -68,7 +71,9 @@ function TodosPage() {
         });
 
       } catch (error) {
-        const isFilterError = Boolean(debouncedFilterTerm || sortBy !== 'createdAt' || sortDirection !== 'desc');
+        if (error.name === 'AbortError') return;
+
+        const isFilterError = Boolean(debouncedFilterTerm || sortBy !== 'createdAt' || sortDirection !== 'asc');
         
         dispatch({
           type: TODO_ACTIONS.FETCH_ERROR,
@@ -83,6 +88,10 @@ function TodosPage() {
     }
 
     fetchTodos();
+
+    return () =>{
+      abortController.abort();
+    };
   }, [token, sortBy, sortDirection, debouncedFilterTerm]);
 
   async function addTodo(todoTitle) {
@@ -159,7 +168,9 @@ function TodosPage() {
         throw new Error("Failed to complete todo.");
       }
 
-      dispatch({ type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS });
+      const completedTodo = await response.json();
+
+      dispatch({ type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS, payload: completedTodo });
 
     } catch (err) {
       dispatch({
@@ -199,7 +210,9 @@ function TodosPage() {
         throw new Error("Failed to update todo.");
       }
 
-      dispatch({ type: TODO_ACTIONS.UPDATE_TODO_SUCCESS });
+      const confirmedTodo = await response.json();
+
+      dispatch({ type: TODO_ACTIONS.UPDATE_TODO_SUCCESS, payload: confirmedTodo });
 
     } catch (err) {
       dispatch({
