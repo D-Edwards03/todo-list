@@ -1,11 +1,15 @@
 import { useEffect, useReducer } from "react";
-import TodoForm from "./TodoForm.jsx";
-import TodoList from "./TodoList/TodoList.jsx";
-import SortBy from "../../shared/SortBy.jsx";
-import FilterInput from "../../shared/FilterInput.jsx";
-import useDebounce from "../../utils/useDebounce.js";
-import {todoReducer, initialTodoState, TODO_ACTIONS} from "../../reducers/todoReducer.js";
-import { useAuth } from "../../contexts/AuthContext.jsx";
+import TodoForm from "../features/Todos/TodoForm.jsx";
+import TodoList from "../features/Todos/TodoList/TodoList.jsx";
+import SortBy from "../shared/SortBy.jsx";
+import FilterInput from "../shared/FilterInput.jsx";
+import useDebounce from "../utils/useDebounce.js";
+import {
+  todoReducer,
+  initialTodoState,
+  TODO_ACTIONS,
+} from "../reducers/todoReducer.js";
+import { useAuth } from "../contexts/AuthContext.jsx";
 
 function TodosPage() {
   const { token } = useAuth();
@@ -52,7 +56,7 @@ function TodosPage() {
           method: "GET",
           headers: { "X-CSRF-TOKEN": token },
           credentials: "include",
-          signal: abortController.signal
+          signal: abortController.signal,
         });
 
         if (response.status === 401) {
@@ -64,23 +68,26 @@ function TodosPage() {
         }
 
         const data = await response.json();
-        
+
         dispatch({
           type: TODO_ACTIONS.FETCH_SUCCESS,
-          payload: { todos: data.tasks }, 
+          payload: { todos: data.tasks },
         });
-
       } catch (error) {
-        if (error.name === 'AbortError') return;
+        if (error.name === "AbortError") return;
 
-        const isFilterError = Boolean(debouncedFilterTerm || sortBy !== 'createdAt' || sortDirection !== 'asc');
-        
+        const isFilterError = Boolean(
+          debouncedFilterTerm ||
+          sortBy !== "createdAt" ||
+          sortDirection !== "asc",
+        );
+
         dispatch({
           type: TODO_ACTIONS.FETCH_ERROR,
           payload: {
-            message: isFilterError 
-                ? `Error filtering/sorting todos: ${error.message}` 
-                : `Error fetching todos: ${error.message}`,
+            message: isFilterError
+              ? `Error filtering/sorting todos: ${error.message}`
+              : `Error fetching todos: ${error.message}`,
             isFilterError,
           },
         });
@@ -89,7 +96,7 @@ function TodosPage() {
 
     fetchTodos();
 
-    return () =>{
+    return () => {
       abortController.abort();
     };
   }, [token, sortBy, sortDirection, debouncedFilterTerm]);
@@ -132,7 +139,6 @@ function TodosPage() {
         type: TODO_ACTIONS.ADD_TODO_SUCCESS,
         payload: { tempId: tempTodo.id, realTodo },
       });
-
     } catch (err) {
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_ERROR,
@@ -170,8 +176,10 @@ function TodosPage() {
 
       const completedTodo = await response.json();
 
-      dispatch({ type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS, payload: completedTodo });
-
+      dispatch({
+        type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS,
+        payload: completedTodo,
+      });
     } catch (err) {
       dispatch({
         type: TODO_ACTIONS.COMPLETE_TODO_ERROR,
@@ -212,8 +220,10 @@ function TodosPage() {
 
       const confirmedTodo = await response.json();
 
-      dispatch({ type: TODO_ACTIONS.UPDATE_TODO_SUCCESS, payload: confirmedTodo });
-
+      dispatch({
+        type: TODO_ACTIONS.UPDATE_TODO_SUCCESS,
+        payload: confirmedTodo,
+      });
     } catch (err) {
       dispatch({
         type: TODO_ACTIONS.UPDATE_TODO_ERROR,
@@ -230,7 +240,11 @@ function TodosPage() {
       {error && (
         <div style={{ color: "red", marginBottom: "1rem" }}>
           <p>{error}</p>
-          <button onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR, payload: 'error' })}>
+          <button
+            onClick={() =>
+              dispatch({ type: TODO_ACTIONS.CLEAR_ERROR, payload: "error" })
+            }
+          >
             Clear Error
           </button>
         </div>
@@ -239,13 +253,20 @@ function TodosPage() {
       {filterError && (
         <div style={{ color: "orange", marginBottom: "1rem" }}>
           <p>{filterError}</p>
-          <button 
-            onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR, payload: 'filterError' })} 
+          <button
+            onClick={() =>
+              dispatch({
+                type: TODO_ACTIONS.CLEAR_ERROR,
+                payload: "filterError",
+              })
+            }
             style={{ marginRight: "0.5rem" }}
           >
             Clear Filter Error
           </button>
-          <button onClick={() => dispatch({ type: TODO_ACTIONS.RESET_FILTERS })}>
+          <button
+            onClick={() => dispatch({ type: TODO_ACTIONS.RESET_FILTERS })}
+          >
             Reset Filters
           </button>
         </div>
@@ -253,20 +274,20 @@ function TodosPage() {
 
       {isTodoListLoading && <p>Loading todos...</p>}
 
-      <SortBy 
+      <SortBy
         sortBy={sortBy}
         sortDirection={sortDirection}
         onSortByChange={(newSortBy) => {
           dispatch({
             type: TODO_ACTIONS.SET_SORT,
-            payload: { sortBy: newSortBy, sortDirection }
-          })
+            payload: { sortBy: newSortBy, sortDirection },
+          });
         }}
         onSortDirectionChange={(newDirection) => {
           dispatch({
             type: TODO_ACTIONS.SET_SORT,
-            payload: { sortBy, sortDirection: newDirection }
-          })
+            payload: { sortBy, sortDirection: newDirection },
+          });
         }}
       />
 
