@@ -16,14 +16,14 @@ function Logoff() {
     const result = await logout();
 
     if (result.success) {
-      navigate('/login');
+      navigate('/login', { replace: true });
     } else {
       setError(result.error || 'Failed to log off.');
       setIsLoggingOff(false);
     }
   }
 
-  if (!isAuthenticated && !isLoggingOff) {
+  if (!isAuthenticated) {
     return null;
   }
 

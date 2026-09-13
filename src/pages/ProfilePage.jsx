@@ -31,9 +31,7 @@ function ProfilePage() {
           throw new Error('Failed to fetch todos');
         }
         
-        const responseData = await response.json();
-
-        const todos = responseData.tasks || [];
+        const todos = await response.json();
         
         const total = todos.length;
         const completed = todos.filter((todo) => todo.isCompleted).length;
