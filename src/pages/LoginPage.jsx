@@ -12,17 +12,14 @@ function LoginPage() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Get intended destination from location state, default to /todos
-  const from = location.state?.from?.pathname || '/todos';
+  const from = location.state?.from || '/todos';
 
-  // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated) {
       navigate(from, { replace: true });
     }
   }, [isAuthenticated, navigate, from]);
 
-  // Handle login form submission
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
@@ -30,7 +27,7 @@ function LoginPage() {
 
     const result = await login(email, password);
     
-    if (result.success) {
+    if (!result.success) {
       navigate(from, {replace: true})
     } else {
       setError(result.error || 'Failed to log on.');
