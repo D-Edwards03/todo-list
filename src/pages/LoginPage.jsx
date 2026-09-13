@@ -31,7 +31,7 @@ function LoginPage() {
     const result = await login(email, password);
     
     if (result.success) {
-      // useEffect will handle the redirect automatically once isAuthenticated flips to true
+      navigate(from, {replace: true})
     } else {
       setError(result.error || 'Failed to log on.');
       setIsLoading(false);
