@@ -33,9 +33,7 @@ function ProfilePage() {
         
         const responseData = await response.json();
 
-        const todos = Array.isArray(responseData)
-          ? responseData
-          : (responseData.tasks || []);
+        const todos = responseData.tasks || [];
         
         const total = todos.length;
         const completed = todos.filter((todo) => todo.isCompleted).length;
@@ -63,6 +61,7 @@ function ProfilePage() {
       <div className="account-info">
         <h3>Account Information</h3>
         <p><strong>Name/Email:</strong> {email|| 'User'}</p>
+        <p><strong>Token:</strong> {token || '(none)'}</p>
         <p>
           <strong>Status:</strong> {isAuthenticated ? 'Active / Logged In' : 'Logged Out'}
         </p>

@@ -12,7 +12,7 @@ function LoginPage() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const from = location.state?.from?.pathname || '/todos';
+  const from = location.state?.from || {pathname: '/todos'};
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -25,12 +25,15 @@ function LoginPage() {
     setError('');
     setIsLoading(true);
 
-    const result = await login(email, password);
-    
-    if (result.success) {
-      navigate(from, {replace: true})
-    } else {
-      setError(result.error || 'Failed to log on.');
+    try {
+      const result = await login(email, password);
+
+      if (!result.success) {
+        setError(result.error || 'Failed to log on');
+      }
+    } catch {
+      setError('Failed to log on');
+    } finally {
       setIsLoading(false);
     }
   }
@@ -38,28 +41,28 @@ function LoginPage() {
   return (
     <div>
       <h2>Log On</h2>
-      
+
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      
+
       <form onSubmit={handleSubmit}>
-          <label htmlFor="email">Email </label>
-          <input 
-            id="email"
-            type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            required 
-          />
-        
-          <label htmlFor="password">Password </label>
-          <input 
-            id="password"
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            required 
-          />
-        
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+
+        <label htmlFor="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+
         <button type="submit" disabled={isLoading}>
           {isLoading ? 'Logging in...' : 'Log On'}
         </button>

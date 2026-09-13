@@ -1,32 +1,23 @@
 import { useMemo } from "react";
 import TodoListItem from "./TodoListItem";
 
-function TodoList({ todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusFilter = 'active' }) {
+function TodoList({ todoList, onCompleteTodo, onUpdateTodo, statusFilter = 'active' }) {
    
-  const filteredTodoList = useMemo(() => {
-    let filteredTodos;
+  const filteredTodos = useMemo(() => {
     switch (statusFilter) {
       case 'completed':
-        filteredTodos = todoList.filter((todo) => todo.isCompleted);
-        break;
+        return todoList.filter((todo) => todo.isCompleted);
       case 'active':
-        filteredTodos = todoList.filter((todo) => !todo.isCompleted);
-        break;
+        return todoList.filter((todo) => !todo.isCompleted);
       case 'all':
       default:
-        filteredTodos = todoList;
-        break;
+        return todoList;
     }
-
-    return {
-      version: dataVersion,
-      todos: filteredTodos,
-    };
-  }, [todoList, dataVersion, statusFilter]);
+  }, [todoList, statusFilter]);
 
   const getEmptyMessage = () => {
     if (todoList.length === 0) {
-      return 'No todos yet. Add a todo above to get started.'
+      return 'No todos yet. Add a todo above to get started.';
     }
 
     switch (statusFilter) {
@@ -40,13 +31,13 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusF
     }
   };
 
-  if (filteredTodoList.todos.length === 0) {
-    return <p>{getEmptyMessage()}</p>
+  if (filteredTodos.length === 0) {
+    return <p>{getEmptyMessage()}</p>;
   }
 
   return (
     <ul>
-      {filteredTodoList.todos.map((todo) => (
+      {filteredTodos.map((todo) => (
         <TodoListItem
           key={todo.id}
           todo={todo}
@@ -59,4 +50,3 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusF
 }
 
 export default TodoList;
-
