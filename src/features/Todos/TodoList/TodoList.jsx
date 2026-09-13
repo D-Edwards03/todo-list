@@ -44,9 +44,7 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusF
     return <p>{getEmptyMessage()}</p>
   }
 
-  return filteredTodoList.todos.length === 0 ? (
-    <p>{getEmptyMessage()}</p>
-  ) : (
+  return (
     <ul>
       {filteredTodoList.todos.map((todo) => (
         <TodoListItem

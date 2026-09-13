@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -9,19 +9,15 @@ function Logoff() {
   const [isLoggingOff, setIsLoggingOff] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    if (isLoggingOff && isAuthenticated) {
-      navigate('/login', {replace: true});
-    }
-  }, [isAuthenticated, isLoggingOff, navigate]);
-
   async function handleLogoff() {
     setIsLoggingOff(true);
     setError('');
 
     const result = await logout();
 
-    if (!result.success) {
+    if (result.success) {
+      navigate('/login');
+    } else {
       setError(result.error || 'Failed to log off.');
       setIsLoggingOff(false);
     }

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 
 function ProfilePage() {
-  const { name, token, isAuthenticated } = useAuth(); 
+  const { email, token, isAuthenticated } = useAuth(); 
   
   const [todoStats, setTodoStats] = useState({ total: 0, completed: 0, active: 0 });
   const [loading, setLoading] = useState(true);
@@ -62,7 +62,7 @@ function ProfilePage() {
       
       <div className="account-info">
         <h3>Account Information</h3>
-        <p><strong>Name:</strong> {name || 'User'}</p>
+        <p><strong>Name/Email:</strong> {email|| 'User'}</p>
         <p>
           <strong>Status:</strong> {isAuthenticated ? 'Active / Logged In' : 'Logged Out'}
         </p>
