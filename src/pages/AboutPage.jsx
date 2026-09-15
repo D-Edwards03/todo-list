@@ -1,15 +1,17 @@
+import styles from "./About.module.css";
+
 function AboutPage() {
   return (
-    <div>
-      <h2>About This App</h2>
-      <p>
+    <div className={styles.container}>
+      <h2 className={styles.mainHeading}>About This App</h2>
+      <p className={styles.description}>
         This Todo application is designed to help users effectively manage their daily tasks, 
         stay organized, and maintain productivity through a clean and responsive interface.
       </p>
 
-      <section>
-        <h3>App Features</h3>
-        <ul>
+      <section className={styles.sectionCard}>
+        <h3 className={styles.subHeading}>App Features</h3>
+        <ul className={styles.featureList}>
           <li>Secure user authentication and protected routes</li>
           <li>Create, read, update, and delete (CRUD) operations for tasks</li>
           <li>Real-time state management for instant UI updates</li>
@@ -18,9 +20,9 @@ function AboutPage() {
         </ul>
       </section>
 
-      <section>
-        <h3>Technologies Used</h3>
-        <ul>
+      <section className={styles.sectionCard}>
+        <h3 className={styles.subHeading}>Technologies Used</h3>
+        <ul className={styles.featureList}>
           <li>
             <strong>React:</strong> Powers the dynamic, component-driven user interface and complex state management.
           </li>

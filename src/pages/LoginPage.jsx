@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
+import formStyles from "../shared/Forms.module.css";
 
 function LoginPage() {
   const { login, isAuthenticated } = useAuth();
@@ -47,25 +48,33 @@ function LoginPage() {
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <div className={formStyles.inputGroup}>
+        <label htmlFor="email" className={formStyles.label}>Email</label>
+          <input
+            id="email"
+            type="email"
+            className={formStyles.input}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            maxLength={255}
+          />
+        </div>
 
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <div className={formStyles.inputGroup}>
+          <label htmlFor="password" className={formStyles.label}>Password</label>
+          <input
+            id="password"
+            type="password"
+            className={formStyles.input}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            maxLength={255}
+          />
+        </div>
 
-        <button type="submit" disabled={isLoading}>
+        <button type="submit" disabled={isLoading} className={formStyles.btnPrimary}>
           {isLoading ? 'Logging in...' : 'Log On'}
         </button>
       </form>
