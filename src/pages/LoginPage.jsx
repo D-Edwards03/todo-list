@@ -57,6 +57,7 @@ function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            maxLength={255}
           />
         </div>
 
@@ -69,6 +70,7 @@ function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            maxLength={255}
           />
         </div>
 

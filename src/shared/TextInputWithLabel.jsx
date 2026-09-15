@@ -6,6 +6,7 @@ function TextInputWithLabel({
   onChange,
   ref,
   value,
+  maxLength
 }) {
   return (
     <div className={formStyles.inputGroup}>
@@ -17,6 +18,7 @@ function TextInputWithLabel({
         value={value}
         onChange={onChange}
         className={formStyles.input}
+        maxLength={maxLength}
       />
     </div>
   );
