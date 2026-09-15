@@ -1,0 +1,28 @@
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.navItem a {
+  text-decoration: none;
+  color: var(--text-light);
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: var(--transition);
+  padding: 0.5rem 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.navItem a:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+  text-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.navItem a.active {
+  color: var(--primary);
+  font-weight: 700;
+  border-bottom: 2px solid var(--accent);
+}

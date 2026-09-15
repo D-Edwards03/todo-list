@@ -1,5 +1,6 @@
 import { NavLink } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
+import styles from './Navigation.module.css';
 
 function Navigation() {
   const { isAuthenticated } = useAuth();
@@ -14,8 +15,8 @@ function Navigation() {
 
   return (
     <nav>
-      <ul style={{ listStyle: 'none', display: 'flex', gap: '1rem', padding: 0, margin: 0 }}>
-        <li>
+      <ul className={styles.navList}>
+        <li className={styles.navItem}>
           <NavLink to="/about" style={navLinkStyle}>
             About
           </NavLink>
@@ -23,19 +24,19 @@ function Navigation() {
         
         {isAuthenticated ? (
           <>
-            <li>
+            <li className={styles.navItem}>
               <NavLink to="/todos" style={navLinkStyle}>
                 Todos
               </NavLink>
             </li>
-            <li>
+            <li className={styles.navItem}>
               <NavLink to="/profile" style={navLinkStyle}>
                 Profile
               </NavLink>
             </li>
           </>
         ) : (
-          <li>
+          <li className={styles.navItem}>
             <NavLink to="/login" style={navLinkStyle}>
               Login
             </NavLink>
