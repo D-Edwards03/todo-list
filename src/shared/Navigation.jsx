@@ -1,42 +1,56 @@
 import { NavLink } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
+import styles from './Navigation.module.css';
 
 function Navigation() {
   const { isAuthenticated } = useAuth();
 
-  const navLinkStyle = ({ isActive }) => {
-    return {
-      fontWeight: isActive ? 'bold' : 'normal',
-      textDecoration: isActive ? 'underline' : 'none',
-      color: '#333'
-    };
-  };
-
   return (
-    <nav>
-      <ul style={{ listStyle: 'none', display: 'flex', gap: '1rem', padding: 0, margin: 0 }}>
-        <li>
-          <NavLink to="/about" style={navLinkStyle}>
+    <nav className={styles.nav}>
+      <ul className={styles.navList}>
+        <li className={styles.navItem}>
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
+            }
+          >
             About
           </NavLink>
         </li>
-        
+
         {isAuthenticated ? (
           <>
-            <li>
-              <NavLink to="/todos" style={navLinkStyle}>
+            <li className={styles.navItem}>
+              <NavLink
+                to="/todos"
+                className={({ isActive }) =>
+                  isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
+                }
+              >
                 Todos
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/profile" style={navLinkStyle}>
+
+            <li className={styles.navItem}>
+              <NavLink
+                to="/profile"
+                className={({ isActive }) =>
+                  isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
+                }
+              >
                 Profile
               </NavLink>
             </li>
           </>
         ) : (
-          <li>
-            <NavLink to="/login" style={navLinkStyle}>
+          <li className={styles.navItem}>
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
+              }
+            >
               Login
             </NavLink>
           </li>

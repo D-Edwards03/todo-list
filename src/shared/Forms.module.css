@@ -1,0 +1,113 @@
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.label {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.input {
+  font-family: 'Playfair Display', serif;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--secondary);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+  width: 100%;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.btnPrimary {
+  background-color: var(--accent);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
+}
+
+.btnSecondary {
+  background-color: var(--secondary);
+  color: var(--text-main);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.btnSecondary:hover:not(:disabled) {
+  background-color: #cbd5e1;
+}
+
+.btnPrimary:disabled,
+.btnSecondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: var(--surface);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--secondary);
+  margin-bottom: 2rem;
+  align-items: flex-end;
+}
+
+.select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--secondary);
+  border-radius: var(--border-radius);
+  font-family: inherit;
+  background-color: var(--surface);
+  transition: var(--transition);
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.errorAlert {
+  background-color: #fee2e2;
+  color: var(--danger);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #f87171;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+/* Spacing utilities */
+.inputGroupSpacing {
+  margin-bottom: 1rem;
+}
+
+.sectionSpacing {
+  margin-bottom: 2rem;
+}

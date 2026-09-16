@@ -2,21 +2,23 @@ import { useMemo } from "react";
 import TodoListItem from "./TodoListItem";
 
 function TodoList({ todoList, onCompleteTodo, onUpdateTodo, statusFilter = 'active' }) {
+
+  const safeList = Array.isArray(todoList) ? todoList : [];
    
   const filteredTodos = useMemo(() => {
     switch (statusFilter) {
       case 'completed':
-        return todoList.filter((todo) => todo.isCompleted);
+        return safeList.filter((todo) => todo.isCompleted);
       case 'active':
-        return todoList.filter((todo) => !todo.isCompleted);
+        return safeList.filter((todo) => !todo.isCompleted);
       case 'all':
       default:
         return todoList;
     }
-  }, [todoList, statusFilter]);
+  }, [safeList, statusFilter]);
 
   const getEmptyMessage = () => {
-    if (todoList.length === 0) {
+    if (safeList.length === 0) {
       return 'No todos yet. Add a todo above to get started.';
     }
 
