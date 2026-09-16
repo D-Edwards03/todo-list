@@ -14,7 +14,6 @@
   border: 1px solid var(--secondary);
   border-radius: var(--border-radius);
   transition: var(--transition);
-  transition: all 0.3s ease;
 }
 
 .item:hover {
@@ -58,7 +57,8 @@
 }
 
 /* Status States */
-.emptyState, .loadingState {
+.emptyState,
+.loadingState {
   text-align: center;
   padding: 3rem;
   color: var(--text-light);
@@ -72,5 +72,91 @@
   padding: 1rem;
   border-radius: var(--border-radius);
   border-left: 4px solid var(--danger);
+  margin-bottom: 1rem;
+}
+
+/* Spacing utility */
+.itemSpacing {
+  margin-bottom: 1rem;
+}
+.list {
+  list-style: none;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--background);
+  border: 1px solid var(--secondary);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent);
+}
+
+.viewMode {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Custom Checkbox */
+.checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.todoText {
+  flex-grow: 1;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.completedText {
+  text-decoration: line-through;
+  color: var(--text-light);
+}
+
+/* Edit Mode Layout */
+.editForm {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  align-items: flex-end;
+}
+
+/* Status States */
+.emptyState,
+.loadingState {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-light);
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.errorState {
+  background-color: #fef2f2;
+  color: var(--danger);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--danger);
+  margin-bottom: 1rem;
+}
+
+/* Spacing utility */
+.itemSpacing {
   margin-bottom: 1rem;
 }

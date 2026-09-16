@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import TextInputWithLabel from "../../shared/TextInputWithLabel";
 import { isValidTodoTitle, getTodoValidationError, MAX_TODO_LENGTH } from "../../utils/todoValidation";
 import formStyles from "../../shared/Forms.module.css";
+import styles from "./TodoForm.module.css"; // new optional module for layout
 
 function TodoForm({ onAddTodo }) {
     const inputRef = useRef();
@@ -20,14 +21,13 @@ function TodoForm({ onAddTodo }) {
     };
 
     return (
-        <form onSubmit={handleAddTodo} style={{ marginBottom: "2rem" }}>
+        <form onSubmit={handleAddTodo} className={styles.formWrapper}>
             {errorMessage && (
-                <p style={{ color: "var(--danger)", fontSize: "0.9rem", marginBottom: "0.5rem" }}>
-                    {errorMessage}
-                </p>
+                <p className={formStyles.formError}>{errorMessage}</p>
             )}
-            <div style={{ display: "flex", gap: "0.5rem", alignItems: "flex-end" }}>
-                <div style={{ flexGrow: 1 }}>
+
+            <div className={styles.formRow}>
+                <div className={styles.inputColumn}>
                     <TextInputWithLabel
                         elementId="todoTitle"
                         labelText="Todo"
@@ -37,13 +37,11 @@ function TodoForm({ onAddTodo }) {
                         maxLength={MAX_TODO_LENGTH}
                     />
                 </div>
-            
-            
+
                 <button 
-                type="submit" 
-                className={formStyles.btnPrimary}
-                disabled={!isValidTodoTitle(workingTodoTitle)}
-                style={{ marginBottom: "1rem" }}
+                    type="submit" 
+                    className={`${formStyles.btnPrimary} ${styles.addButton}`}
+                    disabled={!isValidTodoTitle(workingTodoTitle)}
                 >
                     Add Todo
                 </button>

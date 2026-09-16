@@ -29,7 +29,7 @@
   border-radius: var(--border-radius);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .sectionCard:hover {
@@ -50,6 +50,11 @@
 
 .featureList li:last-child {
   margin-bottom: 0;
+}
+
+/* Spacing utility */
+.sectionSpacing {
+  margin-bottom: 2rem;
 }
 
 @keyframes fadeIn {

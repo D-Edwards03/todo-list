@@ -1,0 +1,63 @@
+.profileContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--secondary);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.heading {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--secondary);
+  padding-bottom: 0.5rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.statCard {
+  background-color: var(--background);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  border-bottom: 4px solid var(--accent);
+  transition: var(--transition);
+}
+
+.statCard:hover {
+  transform: translateY(-3px);
+}
+
+.statCard h4 {
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+.statCard span {
+  font-size: 2.5rem;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* Spacing utility */
+.sectionSpacing {
+  margin-bottom: 2rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

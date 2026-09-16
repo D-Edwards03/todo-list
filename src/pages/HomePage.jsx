@@ -1,22 +1,19 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
+import styles from "./HomePage.module.css";
 
 function HomePage() {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/todos', { replace: true });
-    } else {
-      navigate('/login', { replace: true });
-    }
+    navigate(isAuthenticated ? "/todos" : "/login", { replace: true });
   }, [isAuthenticated, navigate]);
 
   return (
-    <div>
-      <p>Redirecting...</p>
+    <div className={styles.redirectContainer}>
+      <p className={styles.redirectText}>Redirecting...</p>
     </div>
   );
 }

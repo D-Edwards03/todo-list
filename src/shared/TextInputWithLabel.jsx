@@ -1,16 +1,16 @@
+import { forwardRef } from "react";
 import formStyles from "./Forms.module.css";
 
-function TextInputWithLabel({
-  elementId,
-  labelText,
-  onChange,
-  ref,
-  value,
-  maxLength
-}) {
+const TextInputWithLabel = forwardRef(function TextInputWithLabel(
+  { elementId, labelText, onChange, value, maxLength },
+  ref
+) {
   return (
-    <div className={formStyles.inputGroup}>
-      <label htmlFor={elementId} className={formStyles.label}>{labelText}</label>
+    <div className={`${formStyles.inputGroup} ${formStyles.inputGroupSpacing}`}>
+      <label htmlFor={elementId} className={formStyles.label}>
+        {labelText}
+      </label>
+
       <input
         type="text"
         id={elementId}
@@ -22,6 +22,6 @@ function TextInputWithLabel({
       />
     </div>
   );
-}
+});
 
 export default TextInputWithLabel;

@@ -34,7 +34,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     <li className={styles.item}>
       {isEditing ? (
         <form onSubmit={handleUpdate} className={styles.editForm}>
-          <div className={formStyles.inputGoup}>
+          <div className={formStyles.inputGroup}>
             <TextInputWithLabel
               elementId={`todo-${todo.id}`}
               labelText="Todo"

@@ -9,14 +9,19 @@ function Header() {
   return (
     <header className={styles.header}>
       <h1 className={styles.title}>Todo List</h1>
-      <Navigation />
-      {isAuthenticated && (
-        <div>
-          <Logoff />
-        </div>
-      )}
+
+      <div className={styles.navGroup}>
+        <Navigation />
+
+        {isAuthenticated && (
+          <div className={styles.logoffContainer}>
+            <Logoff />
+          </div>
+        )}
+      </div>
     </header>
   );
 }
 
 export default Header;
+

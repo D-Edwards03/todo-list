@@ -3,7 +3,7 @@
 A professional, full-featured Todo application designed to help users effectively manage their daily tasks, stay organized, and maintain productivity through a clean, responsive, and intuitive interface.
 
 ## 🔗 Live Demo
-[View Live Demo Here](https://your-deployment-link.com)
+Coming soon
 
 ## ✨ Features
 * **Secure Authentication:** Protected routing ensuring only authenticated users can access their tasks.
@@ -42,7 +42,7 @@ To get a local copy up and running, follow these simple steps.
    git clone [https://github.com/D-Edwards03/todo-list]
 
 2. Navigate into the directory
-   cd https://github.com/D-Edwards03/todo-list
+   todo-list
 
 3. Install NPM packages
    npm install

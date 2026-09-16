@@ -26,7 +26,6 @@ function TodosPage() {
     sortBy,
     sortDirection,
     filterTerm,
-    dataVersion,
   } = state;
 
   const statusFilter = searchParams.get('status') || 'all';
@@ -310,7 +309,6 @@ function TodosPage() {
         todoList={todoList}
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
-        dataVersion={dataVersion}
         statusFilter={statusFilter}
       />
     </div>

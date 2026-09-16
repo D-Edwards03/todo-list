@@ -1,0 +1,17 @@
+/* Full-page container for the redirect message */
+.redirectContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  width: 100%;
+  text-align: center;
+}
+
+/* Text styling for the redirect message */
+.redirectText {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-main, #16293b);
+  opacity: 0.85;
+}

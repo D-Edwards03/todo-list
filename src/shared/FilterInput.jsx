@@ -2,8 +2,11 @@ import formStyles from "./Forms.module.css";
 
 function FilterInput({ filterTerm, onFilterChange }) {
   return (
-    <div className={formStyles.inputGroup} style={{ marginBottom: "1rem" }}>
-      <label htmlFor="filterInput" className={formStyles.label}>Search todos: </label>
+    <div className={`${formStyles.inputGroup} ${formStyles.inputGroupSpacing}`}>
+      <label htmlFor="filterInput" className={formStyles.label}>
+        Search todos:
+      </label>
+
       <input
         id="filterInput"
         type="text"

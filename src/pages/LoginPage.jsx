@@ -29,9 +29,7 @@ function LoginPage() {
     try {
       const result = await login(email, password);
 
-      if (result.success) {
-        navigate(from, { replace: true });
-      } else {
+      if (!result.success) {
         setError(result.error || 'Failed to log on');
       }
     } catch {
@@ -42,14 +40,14 @@ function LoginPage() {
   }
 
   return (
-    <div>
+    <div className={formStyles.formContainer}>
       <h2>Log On</h2>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p className={formStyles.formError}>{error}</p>}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={formStyles.form}>
         <div className={formStyles.inputGroup}>
-        <label htmlFor="email" className={formStyles.label}>Email</label>
+          <label htmlFor="email" className={formStyles.label}>Email</label>
           <input
             id="email"
             type="email"
@@ -74,7 +72,11 @@ function LoginPage() {
           />
         </div>
 
-        <button type="submit" disabled={isLoading} className={formStyles.btnPrimary}>
+        <button
+          type="submit"
+          disabled={isLoading}
+          className={formStyles.btnPrimary}
+        >
           {isLoading ? 'Logging in...' : 'Log On'}
         </button>
       </form>
