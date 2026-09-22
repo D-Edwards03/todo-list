@@ -1,24 +1,24 @@
 export const TODO_ACTIONS = {
-  FETCH_START: 'FETCH_START',
-  FETCH_SUCCESS: 'FETCH_SUCCESS',
-  FETCH_ERROR: 'FETCH_ERROR',
+  FETCH_START: "FETCH_START",
+  FETCH_SUCCESS: "FETCH_SUCCESS",
+  FETCH_ERROR: "FETCH_ERROR",
 
-  ADD_TODO_START: 'ADD_TODO_START',
-  ADD_TODO_SUCCESS: 'ADD_TODO_SUCCESS',
-  ADD_TODO_ERROR: 'ADD_TODO_ERROR',
+  ADD_TODO_START: "ADD_TODO_START",
+  ADD_TODO_SUCCESS: "ADD_TODO_SUCCESS",
+  ADD_TODO_ERROR: "ADD_TODO_ERROR",
 
-  COMPLETE_TODO_START: 'COMPLETE_TODO_START',
-  COMPLETE_TODO_SUCCESS: 'COMPLETE_TODO_SUCCESS',
-  COMPLETE_TODO_ERROR: 'COMPLETE_TODO_ERROR',
+  COMPLETE_TODO_START: "COMPLETE_TODO_START",
+  COMPLETE_TODO_SUCCESS: "COMPLETE_TODO_SUCCESS",
+  COMPLETE_TODO_ERROR: "COMPLETE_TODO_ERROR",
 
-  UPDATE_TODO_START: 'UPDATE_TODO_START',
-  UPDATE_TODO_SUCCESS: 'UPDATE_TODO_SUCCESS',
-  UPDATE_TODO_ERROR: 'UPDATE_TODO_ERROR',
+  UPDATE_TODO_START: "UPDATE_TODO_START",
+  UPDATE_TODO_SUCCESS: "UPDATE_TODO_SUCCESS",
+  UPDATE_TODO_ERROR: "UPDATE_TODO_ERROR",
 
-  SET_SORT: 'SET_SORT',
-  SET_FILTER: 'SET_FILTER',
-  CLEAR_ERROR: 'CLEAR_ERROR',
-  RESET_FILTERS: 'RESET_FILTERS'
+  SET_SORT: "SET_SORT",
+  SET_FILTER: "SET_FILTER",
+  CLEAR_ERROR: "CLEAR_ERROR",
+  RESET_FILTERS: "RESET_FILTERS",
 };
 
 export const initialTodoState = {
@@ -26,20 +26,19 @@ export const initialTodoState = {
   error: "",
   filterError: "",
   isTodoListLoading: true,
-  sortBy: 'createdAt',
-  sortDirection: 'asc',
-  filterTerm: ""
+  sortBy: "createdAt",
+  sortDirection: "asc",
+  filterTerm: "",
 };
 
 export function todoReducer(state, action) {
   switch (action.type) {
-
     case TODO_ACTIONS.FETCH_START:
       return {
         ...state,
         isTodoListLoading: true,
-        error: '',
-        filterError: '',
+        error: "",
+        filterError: "",
       };
 
     case TODO_ACTIONS.FETCH_SUCCESS:
@@ -47,22 +46,22 @@ export function todoReducer(state, action) {
         ...state,
         todoList: action.payload.todos || [],
         isTodoListLoading: false,
-        error: '',
-        filterError: '',
+        error: "",
+        filterError: "",
       };
 
     case TODO_ACTIONS.FETCH_ERROR:
       return {
         ...state,
         isTodoListLoading: false,
-        error: action.payload.error || '',
-        filterError: action.payload.filterError || '',
+        error: action.payload.error || "",
+        filterError: action.payload.filterError || "",
       };
 
     case TODO_ACTIONS.ADD_TODO_START:
       return {
         ...state,
-        error: '',
+        error: "",
         todoList: [action.payload, ...state.todoList],
       };
 
@@ -72,25 +71,27 @@ export function todoReducer(state, action) {
         todoList: state.todoList.map((todo) =>
           todo.isTemp && todo.id === action.payload.tempId
             ? action.payload.realTodo
-            : todo
-        )
+            : todo,
+        ),
       };
 
     case TODO_ACTIONS.ADD_TODO_ERROR:
       return {
         ...state,
-        todoList: state.todoList.filter((todo) => todo.id !== action.payload.tempId),
+        todoList: state.todoList.filter(
+          (todo) => todo.id !== action.payload.tempId,
+        ),
         error: action.payload.error,
       };
 
     case TODO_ACTIONS.COMPLETE_TODO_START:
       return {
         ...state,
-        error: '',
+        error: "",
         todoList: state.todoList.map((todo) =>
-          todo.id === action.payload
-            ? { ...todo, isCompleted: true }
-            : todo
+          todo.id === action.payload.id
+            ? { ...todo, isCompleted: action.payload.isCompleted }
+            : todo,
         ),
       };
 
@@ -98,8 +99,8 @@ export function todoReducer(state, action) {
       return {
         ...state,
         todoList: state.todoList.map((todo) =>
-          todo.id === action.payload.id ? action.payload : todo
-        )
+          todo.id === action.payload.id ? action.payload : todo,
+        ),
       };
 
     case TODO_ACTIONS.COMPLETE_TODO_ERROR:
@@ -108,7 +109,7 @@ export function todoReducer(state, action) {
         todoList: state.todoList.map((todo) =>
           todo.id === action.payload.originalTodo.id
             ? action.payload.originalTodo
-            : todo
+            : todo,
         ),
         error: action.payload.error,
       };
@@ -116,9 +117,9 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.UPDATE_TODO_START:
       return {
         ...state,
-        error: '',
+        error: "",
         todoList: state.todoList.map((todo) =>
-          todo.id === action.payload.id ? action.payload : todo
+          todo.id === action.payload.id ? action.payload : todo,
         ),
       };
 
@@ -126,8 +127,8 @@ export function todoReducer(state, action) {
       return {
         ...state,
         todoList: state.todoList.map((todo) =>
-          todo.id === action.payload.id ? action.payload : todo
-        )
+          todo.id === action.payload.id ? action.payload : todo,
+        ),
       };
 
     case TODO_ACTIONS.UPDATE_TODO_ERROR:
@@ -136,7 +137,7 @@ export function todoReducer(state, action) {
         todoList: state.todoList.map((todo) =>
           todo.id === action.payload.originalTodo.id
             ? action.payload.originalTodo
-            : todo
+            : todo,
         ),
         error: action.payload.error,
       };
@@ -157,19 +158,21 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.CLEAR_ERROR:
       return {
         ...state,
-        error: action.payload.target === 'error' ? '' : state.error,
-        filterError: action.payload.target === 'filterError' ? '' : state.filterError,
+        error:
+          action.payload === "error" ? "" : state.error,
+        filterError:
+          action.payload === "filterError" ? "" : state.filterError,
       };
 
     case TODO_ACTIONS.RESET_FILTERS:
       return {
         ...state,
-        filterTerm: '',
-        sortBy: 'createdAt',
-        sortDirection: 'asc',
-        error: '',
-        filterError: '',
-        isTodoListLoading: false
+        filterTerm: "",
+        sortBy: "createdAt",
+        sortDirection: "asc",
+        error: "",
+        filterError: "",
+        isTodoListLoading: false,
       };
 
     default:

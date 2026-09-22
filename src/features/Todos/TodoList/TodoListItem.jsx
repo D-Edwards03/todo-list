@@ -30,6 +30,10 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     setIsEditing(false);
   };
 
+  const handleToggle = () => {
+    onCompleteTodo(todo.id, !todo.isCompleted);
+  };
+
   return (
     <li className={styles.item}>
       {isEditing ? (
@@ -43,11 +47,19 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
             />
           </div>
 
-          <button type="button" onClick={handleCancel} className={formStyles.btnSecondary}>
+          <button
+            type="button"
+            onClick={handleCancel}
+            className={formStyles.btnSecondary}
+          >
             Cancel
           </button>
 
-          <button type="submit" disabled={!isValidTodoTitle(workingTitle)} className={formStyles.btnPrimary}>
+          <button
+            type="submit"
+            disabled={!isValidTodoTitle(workingTitle)}
+            className={formStyles.btnPrimary}
+          >
             Update
           </button>
         </form>
@@ -59,13 +71,15 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
               className={styles.checkbox}
               id={`checkbox${todo.id}`}
               checked={todo.isCompleted}
-              onChange={() => onCompleteTodo(todo.id)}
+              onChange={handleToggle}
             />
           </label>
 
-          <span 
+          <span
             onClick={() => setIsEditing(true)}
-            className={`${styles.todoText} ${todo.isCompleted ? styles.completedText : ""}`}
+            className={`${styles.todoText} ${
+              todo.isCompleted ? styles.completedText : ""
+            }`}
           >
             {todo.title}
           </span>

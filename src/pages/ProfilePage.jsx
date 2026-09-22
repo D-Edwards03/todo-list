@@ -63,7 +63,6 @@ function ProfilePage() {
       <div className={styles.card}>
         <h3 className={styles.heading}>Account Information</h3>
         <p><strong>Name:</strong> {name || 'User'}</p>
-        <p><strong>Token:</strong> {token || '(none)'}</p>
         <p><strong>Status:</strong> {isAuthenticated ? 'Active / Logged In' : 'Logged Out'}</p>
       </div>
 

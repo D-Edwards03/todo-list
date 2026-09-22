@@ -28,7 +28,7 @@ function TodosPage() {
     filterTerm,
   } = state;
 
-  const statusFilter = searchParams.get('status') || 'all';
+  const statusFilter = searchParams.get("status") || "all";
 
   const debouncedFilterTerm = useDebounce(filterTerm, 300);
 
@@ -155,42 +155,36 @@ function TodosPage() {
     }
   }
 
-  async function completeTodo(id) {
+  async function completeTodo(id, isCompleted) {
     const originalTodo = todoList.find((t) => t.id === id);
-
-    dispatch({ type: TODO_ACTIONS.COMPLETE_TODO_START, payload: id });
-
+    dispatch({
+      type: TODO_ACTIONS.COMPLETE_TODO_START,
+      payload: { id, isCompleted },
+    });
     try {
       const response = await fetch(`/api/tasks/${id}`, {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-TOKEN": token,
-        },
+        headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": token },
         credentials: "include",
-        body: JSON.stringify({ isCompleted: true }),
+        body: JSON.stringify({ isCompleted }),
       });
-
       if (response.status === 401) {
         throw new Error("Unauthorized. Please log on again.");
       }
-
       if (!response.ok) {
-        throw new Error("Failed to complete todo.");
+        throw new Error("Failed to update todo.");
       }
-
-      const completedTodo = await response.json();
-
+      const updatedTodo = await response.json();
       dispatch({
         type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS,
-        payload: completedTodo,
+        payload: updatedTodo,
       });
     } catch (err) {
       dispatch({
         type: TODO_ACTIONS.COMPLETE_TODO_ERROR,
         payload: {
           originalTodo,
-          error: err.message || "Something went wrong completing the todo.",
+          error: err.message || "Something went wrong updating the todo.",
         },
       });
     }
