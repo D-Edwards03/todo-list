@@ -83,18 +83,3 @@
 .itemSpacing {
   margin-bottom: 1rem;
 }
-
-.deleteButton {
-  background-color: #d9534f;
-  color: white;
-  border: none;
-  padding: 0.35rem 0.6rem;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 0.5rem;
-  transition: background-color 0.2s ease;
-}
-
-.deleteButton:hover {
-  background-color: #c9302c;
-}
