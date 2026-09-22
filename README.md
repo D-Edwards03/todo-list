@@ -2,10 +2,6 @@
 
 A professional, full-featured task management application built with React. The application allows authenticated users to create, manage, filter, sort, and organize their daily tasks through a clean, responsive, and intuitive interface.
 
-## 🔗 Live Demo
-
-**Coming soon**
-
 ## ✨ Features
 
 ### 🔐 Authentication & Protected Routes
@@ -32,7 +28,6 @@ A professional, full-featured task management application built with React. The 
 
 * Client-side validation for task input.
 * Maximum input-length restrictions.
-* Sanitization of user-provided content to help prevent unsafe data from being stored or rendered.
 
 ### 📱 Responsive Design
 
@@ -54,7 +49,7 @@ The interface is designed to provide a consistent experience across:
 
 | Technology          | Purpose                                         |
 | ------------------- | ----------------------------------------------- |
-| **React 18**        | Frontend UI library                             |
+| **React 19**        | Frontend UI library                             |
 | **React Router v7** | Application routing and protected routes        |
 | **Vite**            | Development server and production build tooling |
 | **CSS Modules**     | Component-scoped styling                        |
