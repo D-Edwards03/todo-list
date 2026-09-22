@@ -1,0 +1,36 @@
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Base nav link style */
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: none;
+  color: var(--text-light);
+  font-weight: 500;
+  font-size: 1.1rem;
+  padding: 0.5rem 0;
+  transition: var(--transition);
+}
+
+/* Hover state */
+.navLink:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+  text-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+} /* Keyboard focus state */
+.navLink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+} /* Active state */
+.active {
+  color: var(--primary);
+  font-weight: 700;
+  border-bottom: 2px solid var(--accent);
+}

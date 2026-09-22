@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
+import styles from "./Logoff.module.css";
+import formStyles from "../shared/Forms.module.css";
 
 function Logoff() {
   const { logout, isAuthenticated } = useAuth();
@@ -28,11 +30,13 @@ function Logoff() {
   }
 
   return (
-    <div className="logoff-container">
-      {error && <span style={{ color: 'red' }}>{error}</span>}
-      <button 
-        onClick={handleLogoff} 
+    <div className={styles.container}>
+      {error && <span className={formStyles.formError}>{error}</span>}
+
+      <button
+        onClick={handleLogoff}
         disabled={isLoggingOff}
+        className={`${formStyles.btnPrimary} ${isLoggingOff ? formStyles.btnLoading : ''}`}
       >
         {isLoggingOff ? "Logging off..." : "Log Off"}
       </button>

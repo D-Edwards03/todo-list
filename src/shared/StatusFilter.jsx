@@ -1,4 +1,5 @@
 import { useSearchParams } from 'react-router';
+import formStyles from "../shared/Forms.module.css";
 
 function StatusFilter() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -12,21 +13,25 @@ function StatusFilter() {
     } else {
       newParams.set('status', status);
     }
-    
+
     setSearchParams(newParams);
   };
 
   return (
-    <div>
-      <label htmlFor='statusFilter'>Show:</label>
+    <div className={`${formStyles.inputGroup} ${formStyles.inputGroupSpacing}`}>
+      <label htmlFor="statusFilter" className={formStyles.label}>
+        Show:
+      </label>
+
       <select
-        id='statusFilter'
+        id="statusFilter"
         value={currentStatus}
         onChange={(e) => handleStatusChange(e.target.value)}
+        className={formStyles.select}
       >
-        <option value='all'>All Todos</option>
-        <option value='active'>Active Todos</option>
-        <option value='completed'>Completed Todos</option>
+        <option value="all">All Todos</option>
+        <option value="active">Active Todos</option>
+        <option value="completed">Completed Todos</option>
       </select>
     </div>
   );

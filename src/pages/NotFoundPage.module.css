@@ -1,0 +1,72 @@
+/* Main wrapper for the 404 page */
+.container {
+  max-width: 700px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+} 
+
+/* Large "404" heading */
+.mainHeading {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+} 
+
+/* "Page Not Found" subheading */
+.subHeading {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+} 
+
+/* Description paragraph */
+.description {
+  font-size: 1rem;
+  color: var(--text-main);
+  opacity: 0.85;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+} 
+
+/* Container for navigation links */
+.linkGroup {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+} 
+
+/* Individual link styling */
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.link:hover {
+  background-color: var(--secondary);
+  color: var(--text-main);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none;
+  }
+}

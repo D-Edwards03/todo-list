@@ -1,62 +1,62 @@
 import { createContext, useContext, useState } from "react";
 
-// Create the context
 const AuthContext = createContext();
 
-// Custom hook with error checking
 export function useAuth() {
   const context = useContext(AuthContext);
-
   if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
-
   return context;
 }
 
 export function AuthProvider({ children }) {
-  // State for authentication
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [token, setToken] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [authError, setAuthError] = useState("");
 
-  // Functions will go here...
   const login = async (userEmail, password) => {
+    setIsLoading(true);
+    setAuthError("");
+
+    if (!userEmail.trim() || !password.trim()) {
+      setIsLoading(false);
+      setAuthError("Email and password are required.");
+      return { success: false };
+    }
+
     try {
       const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: userEmail, password }),
         credentials: "include",
+        body: JSON.stringify({ email: userEmail, password }),
       };
 
       const res = await fetch("/api/users/logon", options);
       const data = await res.json();
 
       if (res.status === 200 && data.name && data.csrfToken) {
-        // Success: Update state
-        setEmail(data.name);
+        setEmail(userEmail);
+        setName(data.name);
         setToken(data.csrfToken);
         return { success: true };
-      } else {
-        // Failure: Return error
-        return {
-          success: false,
-          error: `Authentication failed: ${data?.message}`,
-        };
       }
-    } catch (error) {
-      return {
-        success: false,
-        error: "Network error during login",
-      };
+
+      setAuthError(data?.message || "Authentication failed.");
+      return { success: false };
+    } catch {
+      setAuthError("Network error during login.");
+      return { success: false };
+    } finally {
+      setIsLoading(false);
     }
   };
+
   const logout = async () => {
-    if (!token) {
-      setEmail("");
-      setToken("");
-      return { success: true };
-    }
+    setIsLoading(true);
 
     try {
       const options = {
@@ -68,34 +68,27 @@ export function AuthProvider({ children }) {
         credentials: "include",
       };
 
-      // Call logout API
-      const res = await fetch("/api/users/logoff", options);
-
-      if (res.ok) {
-        return { success: true };
-      } else {
-        return {
-          success: false,
-          error: "Failed to log out on the server.",
-        };
-      }
-    } catch (error) {
-      return {
-        success: false,
-        error: "Network error during logout",
-      };
+      await fetch("/api/users/logoff", options);
+    } catch {
+      // Even if server fails, we still clear client state
     } finally {
-      // Clear state always, whether API succeeds or fails
       setEmail("");
+      setName("");
       setToken("");
+      setIsLoading(false);
+      setAuthError("");
     }
+
+    return { success: true };
   };
 
-  // Context value object
   const value = {
     email,
+    name,
     token,
     isAuthenticated: !!token,
+    isLoading,
+    authError,
     login,
     logout,
   };
