@@ -45,6 +45,9 @@
   font-size: 1.1rem;
   cursor: pointer;
   overflow-wrap: anywhere;
+  background: transparent;
+  color: inherit;
+  text-align: left;
 }
 
 .completedText {
