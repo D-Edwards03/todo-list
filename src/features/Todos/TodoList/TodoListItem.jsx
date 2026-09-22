@@ -75,14 +75,15 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
             />
           </label>
 
-          <span
+          <button
+            type="button"
             onClick={() => setIsEditing(true)}
             className={`${styles.todoText} ${
               todo.isCompleted ? styles.completedText : ""
             }`}
           >
             {todo.title}
-          </span>
+          </button>
         </form>
       )}
     </li>

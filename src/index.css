@@ -38,13 +38,9 @@ body {
 
 /* Global Button Reset for consistent baseline */
 button {
-font-family: inherit;
-cursor: pointer;
-border: none;
-}
-
-button {
-cursor: default;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
 }
 
 button:disabled {

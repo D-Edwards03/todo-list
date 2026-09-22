@@ -1,9 +1,9 @@
 .list {
-list-style: none;
-margin-top: 2rem;
-display: flex;
-flex-direction: column;
-gap: 1rem;
+  list-style: none;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .item {
@@ -23,84 +23,79 @@ gap: 1rem;
   background-color: #f9fafb;
 }
 
-.item {
-transform: translateY(-2px);
-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-}
-
 .viewMode {
-display: flex;
-align-items: center;
-gap: 1rem;
-width: 100%;
-min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .checkbox {
-width: 1.25rem;
-height: 1.25rem;
-min-width: 1.25rem;
-accent-color: var(--accent);
-cursor: pointer;
+  width: 1.25rem;
+  height: 1.25rem;
+  min-width: 1.25rem;
+  accent-color: var(--accent);
+  cursor: pointer;
 }
 
 .todoText {
-flex: 1;
-min-width: 0;
-font-size: 1.1rem;
-cursor: pointer;
-overflow-wrap: anywhere;
+  flex: 1;
+  min-width: 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+  overflow-wrap: anywhere;
 }
 
 .completedText {
-text-decoration: line-through;
-color: var(--text-light);
+  text-decoration: line-through;
+  color: var(--text-light);
 }
 
 .editForm {
-display: flex;
-gap: 0.5rem;
-width: 100%;
-align-items: flex-end;
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  align-items: flex-end;
 }
 
 .emptyState,
 .loadingState {
-text-align: center;
-padding: 3rem;
-color: var(--text-light);
-font-style: italic;
-font-size: 1.1rem;
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-light);
+  font-style: italic;
+  font-size: 1.1rem;
 }
 
 .errorState {
-background-color: #fef2f2;
-color: var(--danger);
-padding: 1rem;
-border-radius: var(--border-radius);
-border-left: 4px solid var(--danger);
-margin-bottom: 1rem;
+  background-color: #fef2f2;
+  color: var(--danger);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--danger);
+  margin-bottom: 1rem;
 }
 
 .itemSpacing {
-margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 599px) {
-.item {
-padding: 0.75rem;
-}
+  .item {
+    padding: 0.75rem;
+  }
 
-.viewMode {
-gap: 0.75rem;
-}
+  .viewMode {
+    gap: 0.75rem;
+  }
 
-.todoText {
-font-size: 1rem;
-}
+  .todoText {
+    font-size: 1rem;
+  }
 
-.editForm {
-flex-direction: column;
-align-items: stretch;
-}
+  .editForm {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }

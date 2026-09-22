@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import TextInputWithLabel from "../../shared/TextInputWithLabel";
 import { isValidTodoTitle, getTodoValidationError, MAX_TODO_LENGTH } from "../../utils/todoValidation";
 import formStyles from "../../shared/Forms.module.css";
-import styles from "./TodoForm.module.css"; // new optional module for layout
+import styles from "./TodoForm.module.css";
 
 function TodoForm({ onAddTodo }) {
     const inputRef = useRef();
