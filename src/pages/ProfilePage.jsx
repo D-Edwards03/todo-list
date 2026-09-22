@@ -81,7 +81,7 @@ function ProfilePage() {
       {error && <div className={formStyles.errorAlert}>{error}</div>}
 
       {loading ? (
-        <p>Loading your statistics...</p>
+        <p className={styles.loadingState}>Loading your statistics...</p>
       ) : (
         <div>
           <div className={styles.statsGrid}>
