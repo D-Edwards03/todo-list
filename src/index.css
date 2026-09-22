@@ -38,11 +38,13 @@ body {
 
 /* Global Button Reset for consistent baseline */
 button {
-  font-family: 'Playfair Display', serif;
-  cursor: pointer;
-  border: none;
-  background: none;
-  transition: var(--transition);
+font-family: inherit;
+cursor: pointer;
+border: none;
+}
+
+button {
+cursor: default;
 }
 
 button:disabled {
