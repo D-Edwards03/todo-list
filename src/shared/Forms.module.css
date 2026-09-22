@@ -1,113 +1,180 @@
 .inputGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+margin-bottom: 1rem;
 }
 
 .label {
-  font-weight: 600;
-  color: var(--primary);
+font-weight: 600;
+color: var(--primary);
 }
 
 .input {
-  font-family: "Playfair Display", serif;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--secondary);
-  border-radius: var(--border-radius);
-  font-size: 1rem;
-  transition: var(--transition);
-  width: 100%;
+font-family: "Playfair Display", serif;
+padding: 0.75rem 1rem;
+border: 1px solid var(--secondary);
+border-radius: var(--border-radius);
+font-size: 1rem;
+transition: var(--transition);
+width: 100%;
 }
 
-.input:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-color: var(--accent);
+.input,
+.select {
+outline: 2px solid var(--accent);
+outline-offset: 2px;
+border-color: var(--accent);
 }
 
 .btnPrimary,
 .btnSecondary {
-  min-height: 44px;
+min-height: 44px;
 }
 
 .btnPrimary {
-  background-color: var(--accent);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--border-radius);
-  font-weight: 600;
-  font-size: 1rem;
-  transition: var(--transition);
+background-color: var(--accent);
+color: white;
+padding: 0.75rem 1.5rem;
+border-radius: var(--border-radius);
+font-weight: 600;
+font-size: 1rem;
+transition: var(--transition);
 }
 
-.btnPrimary:hover:not(:disabled) {
-  background-color: var(--accent-hover);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
+.btnPrimary:hover() {
+background-color: var(--accent-hover);
+transform: translateY(-3px) scale(1.02);
+box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
 }
 
 .btnSecondary {
-  background-color: var(--secondary);
-  color: var(--text-main);
-  padding: 0.5rem 1rem;
-  border-radius: var(--border-radius);
-  font-size: 0.9rem;
-  transition: var(--transition);
+background-color: var(--secondary);
+color: var(--text-main);
+padding: 0.5rem 1rem;
+border-radius: var(--border-radius);
+font-size: 0.9rem;
+transition: var(--transition);
 }
 
-.btnSecondary:hover:not(:disabled) {
-  background-color: #cbd5e1;
+.btnSecondary:hover() {
+background-color: #cbd5e1;
 }
 
-.btnPrimary:disabled,
-.btnSecondary:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
+.btnPrimary,
+.btnSecondary {
+opacity: 0.6;
+cursor: not-allowed;
+transform: none;
+box-shadow: none;
+}
+
+.btnLoading {
+cursor: wait;
+opacity: 0.7;
 }
 
 .toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  background-color: var(--surface);
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
-  border: 1px solid var(--secondary);
-  margin-bottom: 2rem;
-  align-items: flex-end;
+display: flex;
+flex-wrap: wrap;
+gap: 1rem;
+background-color: var(--surface);
+padding: 1.5rem;
+border-radius: var(--border-radius);
+border: 1px solid var(--secondary);
+margin-bottom: 2rem;
+align-items: flex-end;
+}
+
+.sortGroup {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 0.75rem;
+margin-bottom: 1rem;
+}
+
+.sortSelectSpacing {
+margin-right: 0.5rem;
 }
 
 .select {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--secondary);
-  border-radius: var(--border-radius);
-  font-family: inherit;
-  background-color: var(--surface);
-  transition: var(--transition);
+width: 100%;
+padding: 0.75rem 1rem;
+border: 1px solid var(--secondary);
+border-radius: var(--border-radius);
+font-family: inherit;
+background-color: var(--surface);
+transition: var(--transition);
+}
+
+.select {
+outline: none;
+border-color: var(--accent);
+box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
 .errorAlert {
-  background-color: #fee2e2;
-  color: var(--danger);
-  padding: 1rem;
-  border-radius: var(--border-radius);
-  border: 1px solid #f87171;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  font-weight: 500;
+background-color: #fee2e2;
+color: var(--danger);
+padding: 1rem;
+border-radius: var(--border-radius);
+border: 1px solid #f87171;
+margin-bottom: 1rem;
 }
 
-/* Spacing utilities */
+.filterErrorAlert {
+background-color: #fef3c7;
+color: #92400e;
+padding: 1rem;
+border-radius: var(--border-radius);
+border: 1px solid #f59e0b;
+margin-bottom: 1rem;
+}
+
+.alertActions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.5rem;
+margin-top: 0.75rem;
+}
+
+.loadingState {
+text-align: center;
+padding: 1.5rem;
+color: var(--text-light);
+font-style: italic;
+}
+
+.formError {
+color: var(--danger);
+margin-bottom: 1rem;
+}
 
 .inputGroupSpacing {
-  margin-bottom: 1rem;
+margin-bottom: 1rem;
 }
 
 .sectionSpacing {
-  margin-bottom: 2rem;
+margin-bottom: 2rem;
+}
+
+@media (max-width: 600px) {
+.sortGroup {
+flex-direction: column;
+align-items: stretch;
+}
+
+.sortSelectSpacing {
+margin-right: 0;
+}
+
+.btnPrimary,
+.btnSecondary {
+width: 100%;
+}
+
+.alertActions {
+flex-direction: column;
+}
 }

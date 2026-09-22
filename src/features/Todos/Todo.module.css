@@ -7,19 +7,25 @@ gap: 1rem;
 }
 
 .item {
-display: flex;
-align-items: center;
-padding: 1rem;
-background-color: var(--background);
-border: 1px solid var(--secondary);
-border-radius: var(--border-radius);
-transition: var(--transition);
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--background);
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+
+.item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent);
+  background-color: #f9fafb;
 }
 
 .item {
 transform: translateY(-2px);
 box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-border-color: var(--accent);
 }
 
 .viewMode {

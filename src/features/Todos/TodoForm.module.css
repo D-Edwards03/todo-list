@@ -4,7 +4,7 @@ width: 100%;
 
 .formRow {
 display: flex;
-align-items: flex-end;
+align-items: center;
 gap: 1rem;
 width: 100%;
 }
