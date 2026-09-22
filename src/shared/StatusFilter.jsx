@@ -27,7 +27,7 @@ function StatusFilter() {
         id="statusFilter"
         value={currentStatus}
         onChange={(e) => handleStatusChange(e.target.value)}
-        className={formStyles.input}
+        className={formStyles.select}
       >
         <option value="all">All Todos</option>
         <option value="active">Active Todos</option>

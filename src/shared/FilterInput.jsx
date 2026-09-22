@@ -1,4 +1,5 @@
 import formStyles from "./Forms.module.css";
+import { MAX_TODO_LENGTH } from "../utils/todoValidation";
 
 function FilterInput({ filterTerm, onFilterChange }) {
   return (
@@ -14,6 +15,7 @@ function FilterInput({ filterTerm, onFilterChange }) {
         value={filterTerm}
         onChange={(e) => onFilterChange(e.target.value)}
         placeholder="Search by title..."
+        maxLength={MAX_TODO_LENGTH}
       />
     </div>
   );

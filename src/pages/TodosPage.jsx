@@ -65,11 +65,11 @@ function TodosPage() {
         });
 
         if (response.status === 401) {
-          throw new Error("Unauthorized. Please log on again.");
+          throw new Error("Your session has expired. Please log in again.");
         }
 
         if (!response.ok) {
-          throw new Error("Failed to fetch todos.");
+          throw new Error("Unable to load your todos. Please try again.");
         }
 
         const data = await response.json();
@@ -91,8 +91,8 @@ function TodosPage() {
           type: TODO_ACTIONS.FETCH_ERROR,
           payload: {
             message: isFilterError
-              ? `Error filtering/sorting todos: ${error.message}`
-              : `Error fetching todos: ${error.message}`,
+              ? "Unable to apply the selected filters. Please try again."
+              : error.message,
             isFilterError,
           },
         });
@@ -144,12 +144,12 @@ function TodosPage() {
         type: TODO_ACTIONS.ADD_TODO_SUCCESS,
         payload: { tempId: tempTodo.id, realTodo },
       });
-    } catch (err) {
+    } catch {
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_ERROR,
         payload: {
           tempId: tempTodo.id,
-          error: err.message || "Something went wrong adding the todo.",
+          error: "Unable to add the todo. Please try again.",
         },
       });
     }
@@ -179,12 +179,12 @@ function TodosPage() {
         type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS,
         payload: updatedTodo,
       });
-    } catch (err) {
+    } catch {
       dispatch({
         type: TODO_ACTIONS.COMPLETE_TODO_ERROR,
         payload: {
           originalTodo,
-          error: err.message || "Something went wrong updating the todo.",
+          error: "Unable to update the todo status. Please try again.",
         },
       });
     }
@@ -223,12 +223,12 @@ function TodosPage() {
         type: TODO_ACTIONS.UPDATE_TODO_SUCCESS,
         payload: confirmedTodo,
       });
-    } catch (err) {
+    } catch {
       dispatch({
         type: TODO_ACTIONS.UPDATE_TODO_ERROR,
         payload: {
           originalTodo,
-          error: err.message || "Something went wrong updating the todo.",
+          error: "Unable to update the todo. Please try again.",
         },
       });
     }

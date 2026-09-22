@@ -1,13 +1,28 @@
 .appContainer {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 1.5rem;
+width: 100%;
+max-width: 800px;
+margin: 0 auto;
+padding: 1rem;
 }
 
 .mainContent {
-  background-color: var(--surface);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-md);
-  padding: 2rem;
-  margin-top: 2rem;
+background-color: var(--surface);
+border-radius: var(--border-radius);
+box-shadow: var(--shadow-md);
+padding: 2rem;
+margin-top: 1.5rem;
+}
+
+@media (max-width: 599px) {
+.mainContent {
+padding: 1rem;
+margin-top: 1rem;
+}
+}
+
+@media (min-width: 600px) {
+.appContainer {
+padding: 0 1.5rem;
+margin-top: 2rem;
+}
 }

@@ -7,6 +7,9 @@
 
 /* Base nav link style */
 .navLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   text-decoration: none;
   color: var(--text-light);
   font-weight: 500;
@@ -20,9 +23,12 @@
   color: var(--accent);
   transform: translateY(-2px);
   text-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
-}
-
-/* Active state */
+} /* Keyboard focus state */
+.navLink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+} /* Active state */
 .active {
   color: var(--primary);
   font-weight: 700;

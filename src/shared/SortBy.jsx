@@ -9,7 +9,7 @@ function SortBy({ sortBy, sortDirection, onSortByChange, onSortDirectionChange }
         id="sortBy"
         value={sortBy}
         onChange={(e) => onSortByChange(e.target.value)}
-        className={`${formStyles.input} ${formStyles.sortSelectSpacing}`}
+        className={`${formStyles.select} ${formStyles.sortSelectSpacing}`}
       >
         <option value="createdAt">Created At</option>
         <option value="title">Title</option>
@@ -21,7 +21,7 @@ function SortBy({ sortBy, sortDirection, onSortByChange, onSortDirectionChange }
         id="sortDirection"
         value={sortDirection}
         onChange={(e) => onSortDirectionChange(e.target.value)}
-        className={formStyles.input}
+        className={formStyles.select}
       >
         <option value="desc">Descending</option>
         <option value="asc">Ascending</option>
